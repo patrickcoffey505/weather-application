@@ -1,4 +1,6 @@
-# Getting Started with Create React App
+# Weather Application
+
+This application presents users with the current weather forecast in their area.
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
