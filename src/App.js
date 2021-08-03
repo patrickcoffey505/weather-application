@@ -15,26 +15,27 @@ function App() {
   const [forecastData, setForecastData] = useState([]);
 
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(function(position) {
-      setLat(position.coords.latitude);
-      setLong(position.coords.longitude);
-    });
-  }, []);
-  
-  useEffect(() => {
-      const fetchData = async () => {
-        await fetch(`${process.env.REACT_APP_API_URL}/weather/?lat=${lat}&lon=${long}&units=imperial&appid=${process.env.REACT_APP_API_KEY}`)
+    const fetchData = async () => {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        setLat(position.coords.latitude);
+        setLong(position.coords.longitude);
+      });
+
+      await fetch(`${process.env.REACT_APP_API_URL}/weather/?lat=${lat}&lon=${long}&units=imperial&appid=${process.env.REACT_APP_API_KEY}`)
         .then(res => res.json())
         .then(result => {
-          setWeatherData(result);
-        })
-        .then(fetch(`${process.env.REACT_APP_API_URL}/forecast/?id=${weatherData.id}&cnt=8&units=imperial&appid=${process.env.REACT_APP_API_KEY}`))
+          setWeatherData(result)
+          console.log(result);
+      })
+    
+      await fetch(`${process.env.REACT_APP_API_URL}/forecast/?lat=${lat}&lon=${long}&cnt=8&units=imperial&appid=${process.env.REACT_APP_API_KEY}`)
         .then(res => res.json())
         .then(result => {
-          setForecastData(result.list);
-        });
-      }
-      fetchData();
+          setForecastData(result.list)
+          console.log(result.list);
+      })
+    }
+    fetchData();
   }, [lat, long]);
 
   const setLocation = async e => {
@@ -59,8 +60,8 @@ function App() {
                     value=""
                     handleSubmit={setLocation} />
               </li>
-              <li><a href="#">Home</a></li>
-              <li><a href="#">About</a></li>
+              {/* <li><a href="#">Home</a></li>
+              <li><a href="#">About</a></li> */}
             </ul>
           </div>
 
