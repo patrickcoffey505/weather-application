@@ -16,9 +16,10 @@ export default function Forecast({ forecastData }) {
     });
 
     return (
-        <container>
-            <h2>24 Hour Forecast:</h2>
-            {list_data}
-        </container>
+        <div style={{ overflowX: "scroll" }} >
+            <div style={{ display: "inline-flex" }}>
+                {list_data}
+            </div>
+        </div>
     );
 };
