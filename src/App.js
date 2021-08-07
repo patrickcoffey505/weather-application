@@ -51,8 +51,13 @@ function App() {
     <div className="App">
 
       {(typeof weatherData.main != 'undefined' && typeof forecastData != 'undefined') ? (
-        <container
-        style={{ backgroundImage: `url(/background-images/${weatherData.weather[0].icon}.gif)` }} >
+        <div
+        style={ { backgroundImage: `url(/background-images/${weatherData.weather[0].icon}.gif)`,
+        backgroundPosition: 'center',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        width: '100vw',
+        height: '100vh' } } >
           <div>
             <ul id="nav">
               <li><h3>WEATHER APP</h3></li>
@@ -68,7 +73,7 @@ function App() {
           <Weather weatherData={weatherData}/>
           <br/>
           <Forecast forecastData={forecastData}/>
-        </container>
+        </div>
       ): (
       <div>
         <Dimmer active>
